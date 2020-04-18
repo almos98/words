@@ -15,7 +15,12 @@ fn static_content(file: PathBuf) -> Option<NamedFile> {
 }
 
 fn main() {
-    rocket::ignite()
+    let cfg = rocket::config::Config::build(rocket::config::Environment::Development)
+        .address("localhost")
+        .port(3000)   
+    .   unwrap();
+
+    rocket::custom(cfg)
         .mount("/", routes![pages::index, 
                                           pages::submit,
                                           pages::word_lists, 
