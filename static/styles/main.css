@@ -1,0 +1,50 @@
+html, body {
+    height: 99%;
+    position: relative;
+    background-color: #222222;
+    color:white;
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+a {
+    color: white;
+    font-size: 100px;
+    padding: 10px;
+    margin: 5px;
+}
+
+a:hover {
+    color: #DDDDDD;
+}
+
+textarea {
+    background-color: #222222;
+    color: white;
+    border: none;
+    outline: none;
+    resize: none;
+}
+
+textarea::placeholder {
+    color: #AAAAAA;
+}
+
+#submit {
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+
+    border: none;
+    background-color: #333333;
+    color: white;
+    font-size: 20px;
+    padding: 5px;
+}

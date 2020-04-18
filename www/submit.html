@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Words</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/static/styles/main.css">
+    </head>
+
+    <body>
+        <div class="center">
+            <textarea id="words-input" name="words-input" rows="4" cols="50" placeholder="Enter list of comma separated words here" autofocus></textarea>
+            <button id="submit" name="words" type="button">Submit word(s)</button>
+        </div>
+    </body>
+
+    <script>
+        let words = document.getElementById("words-input");
+        let button = document.getElementById("submit");
+
+        button.onclick = async () => {
+            await fetch("api/words", {
+                method: "PUT",
+                body: words.value
+            });
+        }
+    </script>
+</html>

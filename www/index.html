@@ -2,31 +2,15 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title> SUBMIT YOUR WORDS HERE!!! ONE TIME DEAL!!!!!1!</title>
+        <title>Words</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/static/styles/main.css">
     </head>
 
     <body>
-        <div>
-            <textarea 
-                id="words-input" 
-                name="words-text"  
-                rows="4" 
-                cols="50" 
-                placeholder="Enter list of comma separated words here">
-            </textarea>
-            <button id="submit" name="words" type="button"> Submit word(s)</button>
+        <div class="center">
+            <a href="/submit"><i class="fa fa-plus"></i></a>
+            <a href="/word-lists"><i class="fa fa-eye"></i></a>
         </div>
     </body>
-
-    <script>
-        var words = document.getElementById("words-input");
-        var button = document.getElementById("submit");
-
-        button.onclick = async () => {
-            await fetch("words", {
-                method: 'POST',
-                body: words.value
-            });
-        }
-    </script>
 </html>
