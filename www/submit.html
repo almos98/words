@@ -11,18 +11,28 @@
         <div class="center">
             <textarea id="words-input" name="words-input" rows="4" cols="50" placeholder="Enter list of comma separated words here" autofocus></textarea>
             <button id="submit" name="words" type="button">Submit word(s)</button>
+            <p id="feedback">Words have been submitted successfully!</p>
         </div>
     </body>
 
     <script>
         let words = document.getElementById("words-input");
         let button = document.getElementById("submit");
+        let feedback = document.getElementById("feedback");
 
-        button.onclick = async () => {
-            await fetch("api/words", {
+        button.onclick = () => {
+            fetch("api/words", {
                 method: "PUT",
                 body: words.value
             });
+
+            words.value = "";
+
+            feedback.style.visibility = "inherit";
+            setTimeout(() => {
+                feedback.style.visibility = "hidden";
+            }, 3000);
         }
+
     </script>
 </html>
