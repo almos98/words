@@ -4,6 +4,7 @@ RUN apk add build-base
 
 WORKDIR /app
 COPY ./ /app
+RUN rm -r target
 
 RUN cargo build --release
 
@@ -17,4 +18,4 @@ COPY ./www ./www
 
 EXPOSE 5000
 
-ENTRYPOINT ["/words"]
+ENTRYPOINT ["/app/words"]

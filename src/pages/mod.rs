@@ -12,5 +12,5 @@ pub fn submit() -> Option<NamedFile> {
 
 #[get("/word-lists")]
 pub fn word_lists() -> Option<NamedFile> {
-    NamedFile::open("wordlist").ok()
+    NamedFile::open("lists/wordlist").ok()
 }
