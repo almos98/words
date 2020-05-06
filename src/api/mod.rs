@@ -44,6 +44,7 @@ pub fn get_list(list_name: String) -> String {
             String::new()
         }
     }
+    .replace("\n", "")
 }
 
 // Add the words to list <list_name>
@@ -80,7 +81,7 @@ pub fn add_words_to_list(list_name: String, words: Data) -> Status {
 
 // Get words from some lists
 #[get("/words?<lists>")]
-pub fn get_all_words(lists: Option<String>) -> String {
+pub fn get_words(lists: Option<String>) -> String {
     let lists_to_search: Vec<String> = match lists {
         None => get_lists()
             .as_array()

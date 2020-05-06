@@ -1,16 +1,33 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Words</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="/static/styles/main.css">
-    </head>
 
-    <body>
-        <div class="center">
-            <a href="/submit"><i class="fa fa-plus"></i></a>
-            <a href="/word-lists"><i class="fa fa-eye"></i></a>
+<head>
+    <meta charset="utf-8">
+    <title>Word Lists</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/styles/main.css">
+</head>
+
+<body>
+    <div id="lists">
+        <h2 id="lists-title" class="title center-horizontal"><u>Word Lists</u></h2>
+        <div id="lists-container">
         </div>
-    </body>
+    </div>
+    <div id="main">
+        <div id="title" class="title center-horizontal">
+            <h1 id="title-label" contenteditable="true">Untitled list</h1>
+        </div>
+        <div id="input-area">
+            <textarea id="words-input" name="words-input" rows="15" cols="50"
+                placeholder="Enter list of comma separated words here." autofocus></textarea>
+            <div id="button-holder">
+                <button id="submit">Add word(s)</button>
+                <p id="feedback">Words have been submitted successfully!</p>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="/static/scripts/main.js"></script>
+
 </html>

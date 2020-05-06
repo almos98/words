@@ -23,22 +23,14 @@ fn static_content(file: PathBuf) -> Option<NamedFile> {
 
 fn main() {
     rocket::ignite()
-        .mount(
-            "/",
-            routes![
-                pages::index,
-                pages::submit,
-                pages::word_lists,
-                static_content
-            ],
-        )
+        .mount("/", routes![pages::index, static_content])
         .mount(
             "/api",
             routes![
                 api::get_lists,
                 api::get_list,
                 api::add_words_to_list,
-                api::get_all_words
+                api::get_words
             ],
         )
         .launch();
