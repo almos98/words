@@ -28,9 +28,11 @@ fn main() {
             "/api",
             routes![
                 api::get_lists,
+                api::create_list,
                 api::get_list,
-                api::add_words_to_list,
-                api::get_words
+                api::update_list_no_append,
+                api::update_list_append,
+                api::delete_list
             ],
         )
         .launch();

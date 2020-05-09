@@ -6,6 +6,8 @@
     --accent2-color: #191919;
     --text-color: white;
     --text-accent-color: lightgray;
+    --feedback-text-color: greenyellow;
+    --feedback-text-color-fail: orangered;
 
     /* Positions and Sizes */
     --lists-display-min-width: 120px;
@@ -92,6 +94,7 @@ html, body {
     width: fit-content;
     text-align: center;
     padding: 0;
+    margin: 0px 3px;
 
     background-color: inherit;
     color: inherit;
@@ -155,7 +158,7 @@ html, body {
     transform: translate(200%, 0%);
     padding: 0;
 
-    color:greenyellow;
+    color:var(--feedback-text-color);
     text-align: center;
     visibility: hidden;
 }
