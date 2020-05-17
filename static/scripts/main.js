@@ -77,14 +77,23 @@ generate_lists();
 
 let timeout_id = null;
 elements.submit_button.onclick = async () => {
+    let success = true;
     let list_name = elements.title.innerText;
 
+    if (selected !== list_name) {
+        let resp = await fetch(`/api/rename/${selected}/${list_name}`, {
+            method: "PUT"
+        });
+
+        success = resp.ok;
+    }
     let resp = await fetch(`/api/list/${list_name}?append`, {
         method: "PUT",
         body: elements.words_input.value
     });
+    success = resp.ok;
 
-    if (resp.ok) {
+    if (success) {
         elements.words_input.value = "";
         elements.feedback.style.color = feedback_color_success;
         elements.feedback.innerText = MSG_SUCCESS;

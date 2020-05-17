@@ -32,7 +32,8 @@ fn main() {
                 api::get_list,
                 api::update_list_no_append,
                 api::update_list_append,
-                api::delete_list
+                api::delete_list,
+                api::rename_list
             ],
         )
         .launch();

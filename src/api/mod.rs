@@ -1,9 +1,13 @@
 use std::fs::{self, OpenOptions};
 use std::io::{self, Read, Write};
-use std::path::Path;
+use std::path::{Path, PathBuf};
 
 use rocket::http;
 use rocket_contrib::json::JsonValue;
+
+fn path(file: &String) -> PathBuf {
+    Path::new(crate::LISTS_DIR).join(file)
+}
 
 // Returns a list of all list names
 #[get("/lists")]
@@ -26,7 +30,7 @@ pub fn get_lists() -> JsonValue {
 // Create a new list
 #[post("/list/<list_name>")]
 pub fn create_list(list_name: String) -> http::Status {
-    match fs::File::create(Path::new(crate::LISTS_DIR).join(&list_name)) {
+    match fs::File::create(path(&list_name)) {
         Ok(_) => http::Status::Ok,
         Err(e) => {
             eprintln!("Error while creating list {}: {}", &list_name, e);
@@ -38,9 +42,7 @@ pub fn create_list(list_name: String) -> http::Status {
 // Get contents of a list
 #[get("/list/<list_name>")]
 pub fn get_list(list_name: String) -> String {
-    let f = OpenOptions::new()
-        .read(true)
-        .open(Path::new(crate::LISTS_DIR).join(&list_name));
+    let f = OpenOptions::new().read(true).open(path(&list_name));
 
     match f {
         Ok(mut file) => {
@@ -76,7 +78,7 @@ pub fn update_list(list_name: String, words: rocket::Data, append: bool) -> http
         .write(true)
         .append(append)
         .create(false)
-        .open(Path::new(crate::LISTS_DIR).join(&list_name));
+        .open(path(&list_name));
 
     match f {
         Ok(mut file) => {
@@ -112,11 +114,27 @@ pub fn update_list(list_name: String, words: rocket::Data, append: bool) -> http
 // Remove a list
 #[delete("/list/<list_name>")]
 pub fn delete_list(list_name: String) -> http::Status {
-    match fs::remove_file(Path::new(crate::LISTS_DIR).join(&list_name)) {
+    match fs::remove_file(path(&list_name)) {
         Ok(_) => http::Status::Ok,
         Err(e) => {
-            eprint!("Error while removing list {}: {}", &list_name, e);
+            eprintln!("Error while removing list {}: {}", &list_name, e);
             http::Status::InternalServerError
         }
     }
+}
+
+// Rename a list
+#[put("/rename/<from>/<to>")]
+pub fn rename_list(from: String, to: String) -> http::Status {
+    // Don't want to overwrite the lists
+    if path(&to).exists() {
+        return http::Status::InternalServerError;
+    }
+
+    if let Err(e) = fs::rename(path(&from), path(&to)) {
+        eprintln!("Error while renaming list {} to {}: {}", &from, &to, e);
+        return http::Status::InternalServerError;
+    }
+
+    http::Status::Ok
 }
